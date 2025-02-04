@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EntityRelationships xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <EntityRelationship Name="business_unit_udpp25_pokemon" />
+  <EntityRelationship Name="lk_udpp25_pokemon_createdby" />
+  <EntityRelationship Name="lk_udpp25_pokemon_modifiedby" />
+  <EntityRelationship Name="owner_udpp25_pokemon" />
+  <EntityRelationship Name="team_udpp25_pokemon" />
+  <EntityRelationship Name="user_udpp25_pokemon" />
+</EntityRelationships>

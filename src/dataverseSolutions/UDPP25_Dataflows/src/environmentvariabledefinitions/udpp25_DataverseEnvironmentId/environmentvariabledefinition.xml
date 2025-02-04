@@ -1,0 +1,11 @@
+<environmentvariabledefinition schemaname="udpp25_DataverseEnvironmentId">
+  <defaultvalue>00000000-0000-0000-0000-000000000000</defaultvalue>
+  <displayname default="Dataverse Environment Id">
+    <label description="Dataverse Environment Id" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.0</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000000</type>
+</environmentvariabledefinition>

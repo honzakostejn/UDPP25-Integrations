@@ -1,0 +1,206 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "udpp25_sharedcommondataserviceforapps_85a1a"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      },
+      "shared_dataflows": {
+        "runtimeSource": "invoker",
+        "connection": {
+          "connectionReferenceLogicalName": "udpp25_shareddataflows_efc61"
+        },
+        "api": {
+          "name": "shared_dataflows"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "Dataverse Environment Id (udpp25_DataverseEnvironmentId)": {
+          "defaultValue": "963110c9-a6af-ea20-9d69-fd42545c3056",
+          "type": "String",
+          "metadata": {
+            "schemaName": "udpp25_DataverseEnvironmentId"
+          }
+        }
+      },
+      "triggers": {
+        "manual": {
+          "metadata": {
+            "operationMetadataId": "bc97fdec-32b4-4c83-a2c1-b293b14aa282"
+          },
+          "type": "Request",
+          "kind": "Button",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "required": []
+            }
+          }
+        }
+      },
+      "actions": {
+        "Initialize-AlreadyRefreshedDataflows": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "9ac6b64a-6e8e-4b25-b2f7-6a0b93beb4b1"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "AlreadyRefreshedDataflows",
+                "type": "array",
+                "value": []
+              }
+            ]
+          }
+        },
+        "List-Dataflows": {
+          "runAfter": {
+            "Initialize-AlreadyRefreshedDataflows": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "08a9f6ef-a6a2-4d77-8331-ad35ca49dd85"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "ListRecords",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "msdyn_dataflows",
+              "$select": "msdyn_name,msdyn_originaldataflowid",
+              "$filter": "startswith(msdyn_name, 'INTEGRATION')",
+              "$orderby": "msdyn_name,createdon"
+            },
+            "authentication": {
+              "type": "Raw",
+              "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+            }
+          }
+        },
+        "For-Each-Dataflow": {
+          "foreach": "@outputs('List-Dataflows')?['body/value']",
+          "actions": {
+            "Already-Refreshed": {
+              "actions": {},
+              "runAfter": {},
+              "else": {
+                "actions": {
+                  "Refresh-Dataflow": {
+                    "runAfter": {},
+                    "metadata": {
+                      "operationMetadataId": "e0a721b5-4cf9-40d0-bf71-7c7b2e62f619"
+                    },
+                    "type": "OpenApiConnection",
+                    "inputs": {
+                      "host": {
+                        "connectionName": "shared_dataflows",
+                        "operationId": "RefreshDataflow",
+                        "apiId": "/providers/Microsoft.PowerApps/apis/shared_dataflows"
+                      },
+                      "parameters": {
+                        "workspaceType": "Environment",
+                        "groupIdForRefreshDataflow": "@concat(parameters('Dataverse Environment Id (udpp25_DataverseEnvironmentId)'),'-31c688f59-europe')",
+                        "dataflowIdForRefreshDataflow": "@items('For-Each-Dataflow')?['msdyn_originaldataflowid']"
+                      },
+                      "authentication": {
+                        "type": "Raw",
+                        "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                      }
+                    }
+                  },
+                  "Wait-For-Refresh": {
+                    "runAfter": {
+                      "Refresh-Dataflow": [
+                        "Succeeded"
+                      ]
+                    },
+                    "metadata": {
+                      "operationMetadataId": "0aed7fa6-2c20-4220-b221-45a0cf9f0b1d"
+                    },
+                    "type": "OpenApiConnection",
+                    "inputs": {
+                      "host": {
+                        "connectionName": "shared_dataflows",
+                        "operationId": "OnRefreshComplete",
+                        "apiId": "/providers/Microsoft.PowerApps/apis/shared_dataflows"
+                      },
+                      "parameters": {
+                        "workspaceType": "Environment",
+                        "groupIdForOnRefreshComplete": "@concat(parameters('Dataverse Environment Id (udpp25_DataverseEnvironmentId)'),'-31c688f59-europe')",
+                        "dataflowIdForOnRefreshComplete": "@items('For-Each-Dataflow')?['msdyn_originaldataflowid']"
+                      },
+                      "authentication": {
+                        "type": "Raw",
+                        "value": "@json(decodeBase64(triggerOutputs().headers['X-MS-APIM-Tokens']))['$ConnectionKey']"
+                      }
+                    }
+                  },
+                  "Append-AlreadyRefreshedDataflows": {
+                    "runAfter": {
+                      "Wait-For-Refresh": [
+                        "Succeeded"
+                      ]
+                    },
+                    "metadata": {
+                      "operationMetadataId": "93290d03-ed2c-463a-ab76-e198f0fa16c0"
+                    },
+                    "type": "AppendToArrayVariable",
+                    "inputs": {
+                      "name": "AlreadyRefreshedDataflows",
+                      "value": "@items('For-Each-Dataflow')?['msdyn_name']"
+                    }
+                  }
+                }
+              },
+              "expression": {
+                "equals": [
+                  "@contains(variables('AlreadyRefreshedDataflows'),item()?['msdyn_name'])",
+                  "@true"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "58f3df43-698c-4fae-a313-736d688dd42f"
+              },
+              "type": "If"
+            }
+          },
+          "runAfter": {
+            "List-Dataflows": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "5c2371cf-9a8a-43fd-a07f-697bf32c271a"
+          },
+          "type": "Foreach"
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

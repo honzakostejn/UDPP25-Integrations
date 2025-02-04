@@ -3,6 +3,10 @@ This is a lab for the **Integrations with Custom Connectors, Dataflows and Virtu
 
 ## How to run the lab
 1. Clone the repository.
+2. make sure all the scripts are executable
+    ```bash
+    chmod +x ./src/scripts/*.sh
+    ```
 
 ## Slides
 ---

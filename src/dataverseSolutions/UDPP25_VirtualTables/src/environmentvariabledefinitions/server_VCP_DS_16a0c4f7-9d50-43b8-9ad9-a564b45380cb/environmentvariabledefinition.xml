@@ -1,0 +1,10 @@
+<environmentvariabledefinition schemaname="server_VCP_DS_16a0c4f7-9d50-43b8-9ad9-a564b45380cb">
+  <displayname default="SQL Server Environment Variable - pokemon">
+    <label description="SQL Server Environment Variable - pokemon" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000000</type>
+</environmentvariabledefinition>
