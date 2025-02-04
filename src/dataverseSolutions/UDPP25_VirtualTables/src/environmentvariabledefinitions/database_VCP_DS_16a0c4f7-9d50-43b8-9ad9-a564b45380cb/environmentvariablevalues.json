@@ -2,7 +2,7 @@
   "environmentvariablevalues": {
     "environmentvariablevalue": {
       "iscustomizable": "1",
-      "value": "Main"
+      "value": "{databaseName} see README.md for more information"
     }
   }
 }

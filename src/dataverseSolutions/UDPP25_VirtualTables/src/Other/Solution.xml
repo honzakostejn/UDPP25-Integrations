@@ -89,8 +89,10 @@
       </Addresses>
     </Publisher>
     <RootComponents>
-      <RootComponent type="1" schemaName="udpp25_pokemonvt" behavior="0" />
+      <RootComponent type="1" schemaName="udpp25_abilities" behavior="0" />
       <RootComponent type="183" id="{65168d8e-1319-4470-9d57-9cae249cd5d3}" schemaName="VCP_DS_16a0c4f7-9d50-43b8-9ad9-a564b45380cb" behavior="0" />
+      <RootComponent type="62" schemaName="udpp25_Pokemons" behavior="0" />
+      <RootComponent type="80" schemaName="udpp25_Pokemons" behavior="0" />
     </RootComponents>
     <MissingDependencies>
       <!-- <MissingDependency>

@@ -1,8 +1,8 @@
+param storageName string
 param storageSkuName string = 'Standard_LRS'
 param location string = resourceGroup().location
-param storageName string
 
-var storageNameCleaned = replace(storageName, '-', '')
+var storageNameCleaned = toLower(replace(storageName, '-', ''))
 
 resource storage 'Microsoft.Storage/storageAccounts@2021-09-01' = {
   name: storageNameCleaned

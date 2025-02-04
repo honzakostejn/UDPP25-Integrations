@@ -7,3 +7,6 @@
 - load queries schema matches the destination table schema
 - alternate keys are properly set (even if not used)
 - delete refresh history
+- deploy w/ interactive user
+- document publishing process
+- usually complemented by the cloud flow

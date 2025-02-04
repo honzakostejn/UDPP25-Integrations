@@ -91,6 +91,8 @@
     <RootComponents>
       <RootComponent type="1" schemaName="udpp25_pokemon" behavior="0" />
       <RootComponent type="29" id="{ff4fac57-63e2-ef11-be1f-002248801f16}" behavior="0" />
+      <RootComponent type="62" schemaName="udpp25_Pokemons" behavior="0" />
+      <RootComponent type="80" schemaName="udpp25_Pokemons" behavior="0" />
     </RootComponents>
     <MissingDependencies>
       <!-- <MissingDependency>
