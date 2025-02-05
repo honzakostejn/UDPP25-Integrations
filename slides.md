@@ -14,9 +14,8 @@ Why?!?
 # Business wants us to build an application
 Why?!?
 1. Hypothesis
-2. Experiment
-3. Data
-4. Conclusion
+2. Experiment & collect data
+4. Decision
 
 ---
 # Power Platform as low-code / no-code
@@ -52,6 +51,7 @@ NO DATA => NO ADOPTION => NO DATA
 | Near real-time synch | No                                                                                  | Yes - implemented through Cloud flows (API must support it) | Yes                                  |
 | Write-back           | No                                                                                  | Yes - implemented through Cloud flows                       | ?                                    |
 | Interfaces           | [Power Query connectors](https://learn.microsoft.com/en-us/power-query/connectors/) | OpenAPI 2.0 (Swagger)                                       | OData v4, Virtual Connectors, Custom |
+| Limitations          | ALM is a bit broken, security                                                       | ALM is a bit broken                                         | ALM is a bit broken, security        |
 
 ---
 # Resources
