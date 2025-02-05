@@ -2,7 +2,7 @@
   "environmentvariablevalues": {
     "environmentvariablevalue": {
       "iscustomizable": "1",
-      "value": "{serverAddress} see README.md for more information"
+      "value": "{serverAddress}"
     }
   }
 }

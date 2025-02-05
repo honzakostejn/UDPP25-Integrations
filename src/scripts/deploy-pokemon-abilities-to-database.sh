@@ -9,3 +9,6 @@ connectionString="Server=tcp:$serverName.database.windows.net,1433;Initial Catal
 sqlPackageBin=~/.dotnet/tools/sqlpackage
 
 $sqlPackageBin /a:import /tcs:"$connectionString" /sf:$bacpacFile
+
+printf "\033[0;31m\n>>> BREAKING NEWS ( ͡ᵔ ͜ʖ ͡ᵔ) <<<\033[0m"
+printf "\033[0;31m\nDatabase was successfully restored from the bacpac file!\n\n\033[0m"

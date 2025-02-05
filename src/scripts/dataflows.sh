@@ -19,8 +19,8 @@ environmentId=$($pacBin admin create \
   --currency 'USD' \
   --domain "$environmentName" | tail -n 2 | head -n 1 | awk '{print $2}')
 
-printf "\n>>> BREAKING NEWS ( ͡ᵔ ͜ʖ ͡ᵔ) <<<"
-printf "\nEnvironment '$environmentId' was successfully created!\n\n"
+printf "\033[0;31m\n>>> BREAKING NEWS ( ͡ᵔ ͜ʖ ͡ᵔ) <<<\033[0m"
+printf "\033[0;31m\nEnvironment '$environmentId' was successfully created!\n\n\033[0m"
 
 # build & deploy the solution
 sed -i "s/\"value\": \".*\"/\"value\": \"$environmentId\"/" $environmentId_environmentVariableValueFile
@@ -30,5 +30,5 @@ $pacBin solution import \
   --path ./src/dataverseSolutions/UDPP25_Dataflows/bin/Release/UDPP25_Dataflows.zip \
   --environment "https://$environmentName.crm4.dynamics.com"
 
-printf "\n>>> BREAKING NEWS ( ͡ᵔ ͜ʖ ͡ᵔ) <<<"
-printf "\nSolution was successfully imported!"
+printf "\033[0;31m\n>>> BREAKING NEWS ( ͡ᵔ ͜ʖ ͡ᵔ) <<<\033[0m"
+printf "\033[0;31m\nSolution was successfully imported!\n\n\033[0m"

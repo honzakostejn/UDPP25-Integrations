@@ -1,4 +1,6 @@
+// parameters
 param storageName string
+param whitelistIp string
 param storageSkuName string = 'Standard_LRS'
 param location string = resourceGroup().location
 
@@ -46,7 +48,15 @@ resource storage 'Microsoft.Storage/storageAccounts@2021-09-01' = {
     largeFileSharesState: 'Disabled'
     minimumTlsVersion: 'TLS1_2'
     networkAcls: {
+      resourceAccessRules: []
       bypass: 'AzureServices'
+      virtualNetworkRules: []
+      ipRules: [
+        {
+          value: whitelistIp
+          action: 'Allow'
+        }
+      ]
       defaultAction: 'Deny'
     }
     supportsHttpsTrafficOnly: true

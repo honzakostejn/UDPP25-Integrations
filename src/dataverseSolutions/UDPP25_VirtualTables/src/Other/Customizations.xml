@@ -12,6 +12,8 @@
   <CustomControls />
   <EntityDataProviders />
   <EntityDataSources />
+  <AppModuleSiteMaps />
+  <AppModules />
   <SolutionPluginAssemblies />
   <connectionreferences>
     <connectionreference connectionreferencelogicalname="udpp25_5c730346d6ae44eb834e5fd2bc81ac7d">

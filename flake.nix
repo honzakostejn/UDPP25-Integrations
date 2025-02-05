@@ -18,6 +18,8 @@
         # pkgs.nodejs_20
         # pkgs.jq
         pkgs.curl
+        pkgs.slides
+        pkgs.chafa
 
         pkgs.azure-cli
         pkgs.bicep
