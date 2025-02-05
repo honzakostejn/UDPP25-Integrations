@@ -41,12 +41,12 @@ az deployment group create \
 printf "\033[0;31m\n>>> BREAKING NEWS ( ͡ᵔ ͜ʖ ͡ᵔ) <<<\033[0m"
 printf "\033[0;31m\nThe database was successfully created!\n\n\033[0m"
 
-az deployment group create \
-  --resource-group $resourceGroup \
-  --template-file ./infrastructure/storage-account.bicep \
-  --parameters storageName="$storageName" \
-               whitelistIp=$currentNetworkIp \
-  --output table
+# az deployment group create \
+#   --resource-group $resourceGroup \
+#   --template-file ./infrastructure/storage-account.bicep \
+#   --parameters storageName="$storageName" \
+#                whitelistIp=$currentNetworkIp \
+#   --output table
 
-printf "\033[0;31m\n>>> BREAKING NEWS ( ͡ᵔ ͜ʖ ͡ᵔ) <<<\033[0m"
-printf "\033[0;31m\nThe storage account was successfully created!\n\n\033[0m"
+# printf "\033[0;31m\n>>> BREAKING NEWS ( ͡ᵔ ͜ʖ ͡ᵔ) <<<\033[0m"
+# printf "\033[0;31m\nThe storage account was successfully created!\n\n\033[0m"
